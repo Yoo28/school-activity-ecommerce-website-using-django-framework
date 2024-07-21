@@ -1,0 +1,423 @@
+
+
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+
+  <link rel="icon" type="image/png" href="{% static 'login/images/icons/favicon.ico'%}"/>
+  <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+
+  <!-- font awesome cdn link  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+     
+      <!-- NEW  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
+    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    
+
+    <link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/templatemo.css' %}">
+    <link rel="stylesheet" href="{% static 'css/custom.css'%}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <link rel="stylesheet" href="{%static 'style.css'%}">
+   
+     <title>Myx Culture</title>
+
+
+  </style>
+</head>
+
+<body>
+
+    
+<body>
+    <!-- navbar -->
+    <div id="loading-overlay">
+      <div class="loading-spinner">
+          <div class="spinner"></div>
+      </div>
+  </div>
+  
+  <style>
+      #loading-overlay {
+          display: none;
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(255, 255, 255, 0.8);
+          z-index: 9999;
+      }
+  
+      .loading-spinner {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+      }
+  
+      .spinner {
+          width: 40px;
+          height: 40px;
+          margin: 0 auto;
+          border: 4px solid rgba(0, 0, 0, 0.1);
+          border-left-color: #000000;
+          border-radius: 50%;
+          animation: spin 1s infinite linear;
+      }
+  
+      @keyframes spin {
+          to {
+              transform: rotate(360deg);
+          }
+      }
+  </style>
+  
+  
+  <!-- navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
+      <div class="container d-flex justify-content-between align-items-center">
+  
+          <a class="navbar-brand text-success logo h1 align-self-center" href="{% url 'home'%}">
+              <img src="{% static 'logo/logo.png'%}" alt="" style="width:50px;height:50px,colortext-light;">
+          </a>
+  
+          <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="templatemo_main_nav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+  
+          <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between" id="templatemo_main_nav">
+              <div class="flex-fill">
+                  <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
+                      <li class="nav-item">
+                     
+                      </li>
+                      <li class="nav-item">
+                         
+                      </li>
+                      
+                  </ul>
+              </div>
+             
+              <div class="navbar align-self-center d-flex">
+                <a class="nav-icon position-relative text-decoration-none" href="#">
+                  
+                        <a class="nav-link" href="{% url 'home' %}">Home</a>
+                        <a class="nav-link" href="{% url 'shop' %}">Shop</a>
+                     
+                        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                        <a class="nav-icon position-relative text-decoration-none" href="{%url 'cart'%}" id="cartLink">
+                            Cart
+                            <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
+                            <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark" id="cartItemCount">{{ request.session.cart.keys|length }}</span>
+                          </a>
+
+                    
+                          
+                       
+                </a>
+            </div>
+            
+              
+             
+              </div>
+          </div>
+  
+      </div>
+  </nav>
+  
+  <script>
+      // Handle responsive behavior for small screens
+      var navToggler = document.querySelector(".navbar-toggler");
+      var mainNav = document.querySelector("#templatemo_main_nav");
+  
+      navToggler.addEventListener("click", function () {
+          if (mainNav.classList.contains("show")) {
+              mainNav.classList.remove("show");
+          } else {
+              mainNav.classList.add("show");
+          }
+      });
+  
+      // Handle responsive behavior for small screens
+  var navToggler = document.querySelector(".navbar-toggler");
+  var mainNav = document.querySelector("#templatemo_main_nav");
+  
+  navToggler.addEventListener("click", function () {
+      if (mainNav.classList.contains("show")) {
+          mainNav.classList.remove("show");
+      } else {
+          mainNav.classList.add("show");
+      }
+  });
+  
+  // Show loading overlay on navigation
+  var loadingOverlay = document.getElementById("loading-overlay");
+  var navLinks = document.querySelectorAll("#templatemo_main_nav .nav-link");
+  
+  navLinks.forEach(function (link) {
+      link.addEventListener("click", function (event) {
+          event.preventDefault(); // Prevent default link behavior
+          loadingOverlay.style.display = "flex";
+          var href = this.getAttribute("href");
+          setTimeout(function () {
+              window.location.href = href; // Redirect after a short delay
+          }, 1000); // Change the delay as desired
+      });
+  });
+  
+  // Hide loading overlay after page has loaded
+  window.addEventListener("load", function () {
+      loadingOverlay.style.display = "none";
+  });
+
+  var cartLink = document.getElementById("cartLink");
+
+cartLink.addEventListener("click", function (event) {
+  event.preventDefault(); // Prevent default link behavior
+  loadingOverlay.style.display = "flex";
+  var href = cartLink.getAttribute("href");
+  setTimeout(function () {
+    window.location.href = href; // Redirect after a short delay
+  }, 1000); // Change the delay as desired
+});
+
+// Hide loading overlay after page has loaded
+window.addEventListener("load", function () {
+  loadingOverlay.style.display = "none";
+});
+
+
+
+  </script>
+  
+  
+
+  
+
+
+
+<br>
+<br>
+<br>
+
+<!-- home section start  -->
+<section class="home" id="home">
+
+    <div class="row">
+
+        <div class="content">
+            <h3 style="font-family:'Poppins', sans-serif; font-weight: bold;">#MYXCulture</h3>
+            <p style="font-family:'Poppins', sans-serif; font-weight: bold;">Up to 20% off and Free Shipping order over ₱500</p>
+            <a href="{% url 'shop'%}" class="btn" style="font-family:'Poppins', sans-serif; font-weight: bold;">Shop now</a>
+        </div>
+
+        <div class="swiper books-slider">
+            <div class="swiper-wrapper">
+                <a class="swiper-slide"><img src="{% static 'm1.jpg'%}" alt=""></a>
+                <a class="swiper-slide"><img src="{% static 'm2.jpg'%}" alt=""></a>
+                <a class="swiper-slide"><img src="{% static 'm3.jpg'%}" alt=""></a>
+                <a class="swiper-slide"><img src="{% static 'm4.jpg'%}" alt=""></a>
+                <a class="swiper-slide"><img src="{% static 'm5.jpg'%}" alt=""></a>
+                <a class="swiper-slide"><img src="{% static 'm7.jpg'%}" alt=""></a>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- icons section starts  -->
+
+<section class="icons-container">
+    <div class="icons">
+      <i class="fas fa-shipping-fast" style="margin-left: 100PX;"></i>
+      <div class="content">
+        <h3>Free shipping</h3>
+        <p>order over ₱500</p>
+      </div>
+    </div>
+
+    <div class="icons">
+      <i class="fas fa-redo-alt" style="margin-left: 100PX;"></i>
+      <div class="content">
+        <h3>Easy returns</h3>
+        <p>7 days return</p>
+      </div>
+    </div>
+
+    <div class="icons">
+      <i class="fas fa-headset" style="margin-left: 130PX;"></i>
+      <div class="content">
+        <h3>24/7 Support</h3>
+        <p>call us anytime</p>
+      </div>
+    </div>
+  </section>
+
+
+<link rel="stylesheet" href="{%static 'store.css'%}">
+<section id="page-header">
+	<h2>Featured Products</h2>
+
+</section>
+<!-- deal section starts  -->
+
+
+<div class="container">
+    <div class="row style_featured">
+        <div class="col-md-4">
+            <div>
+                <img src="{%static 'featured/1.png'%}" alt="" class="img-rounded img-thumbnail" />
+                <h3>Skull Love Proclub Shirt</h3>
+                
+                <a href="{%url 'shop'%}" class="btn btn-success launch" title="More">See more »</a>
+
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div>
+                <img src="{%static 'featured/2.png'%}" alt="" class="img-rounded img-thumbnail"/>
+                <h3>Thunder Shirt</h3>
+                
+                <a href="{%url 'shop'%}" class="btn btn-success launch" title="More">See more »</a>
+
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div>
+                <img src="{%static 'featured/3.png'%}" alt="" class="img-rounded img-thumbnail"/>
+                <h3>Thunder Lion Shirt</h3>
+                
+                <a href="{%url 'shop'%}" class="btn btn-success launch" title="More">See more »</a>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<style>
+.style_featured{
+padding: 20px 0;
+text-align: center;
+}
+.style_featured > div > div{
+padding: 10px;
+border: 1px solid transparent;
+border-radius: 4px;
+transition: 0.5s;
+}
+.style_featured > div:hover > div{
+margin-top: +19px;
+border: 1px solid rgb(153, 200, 250);
+box-shadow: rgba(0, 0, 0, 0.1) 0px 9px 9px 9px;
+background: rgba(153, 200, 250, 0.1);
+transition: 0.99s;
+}
+</style>
+
+
+<section class="deal">
+
+    <div class="content">
+        <h3 style="font-family:'Poppins', sans-serif; font-weight: bold;">Deal of the day</h3>
+        <h1 style="font-family:'Poppins', sans-serif; font-weight: bold;">UP TO 20% OFF</h1>
+        <p style="font-family:'Poppins', sans-serif; font-weight: bold;">Products crafted with fibers made from 12 recycled PET bottles, blended with 60% cotton in colors you'll absolutely love</p>
+        <a href="{%url 'shop'%}" class="btn" style="font-family:'Poppins', sans-serif; font-weight: bold;">shop now</a>
+    </div>
+
+    <div class="image">
+        <img src="{%static 'hero4.png'%}" alt="">
+    </div>
+
+</section>
+
+
+
+
+<!-- footer section starts  -->
+
+
+<!-- Start Footer -->
+<footer class="bg-dark" id="tempaltemo_footer">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-4 pt-5">
+                <a class="navbar-brand text-success logo h1 align-self-center" href="{% url 'shop'%}">
+                <img src="{% static 'logo/logo.png'%}" style="width:50px;height:50px,colortext-light; margin-right: 200px;">
+                </a>
+                <ul class="list-unstyled text-light footer-link-list">
+                  
+                    <li>
+                        <i class="fa fa-phone fa-fw"></i>
+                        <a class="text-decoration-none">+63-995-256-2031</a>
+                    </li>
+                    <li>
+                        <i class="fa fa-envelope fa-fw"></i>
+                        <a class="text-decoration-none">myxculture@gmail.com</a>
+                    </li>
+                </ul>
+            </div>
+
+       
+
+            <div class="col-md-4 pt-5">
+                <h2 class="h2 text-light border-bottom pb-3 border-light">Further Info</h2>
+                <ul class="list-inline text-left footer-icons">
+                    <li class="list-inline-item border border-light rounded-circle text-center">
+                        <a class="text-light text-decoration-none" target="_blank" href="https://www.facebook.com/profile.php?id=100068240926048"><i class="fab fa-facebook-f fa-lg fa-fw"></i></a>
+                    </li>
+                    <li class="list-inline-item border border-light rounded-circle text-center">
+                        <a class="text-light text-decoration-none" target="_blank" href="https://www.instagram.com/myx_culture/"><i class="fab fa-instagram fa-lg fa-fw"></i></a>
+                    </li>
+                    <li class="list-inline-item border border-light rounded-circle text-center">
+                        <a class="text-light text-decoration-none" target="_blank" href="https://shopee.ph/myx_culture?smtt=0.0.9&fbclid=IwAR0XXHI-GPI61wjDVTUZ4-KfmlIwxSB-B0H9emse7Ior9o0puK2LtU5D2oss"><i class="fa-sharp fa-solid fa-bag-shopping"></i></a>
+                    </li>
+            </div>
+
+        </div>
+
+       
+    </div>
+
+   
+
+</footer>
+
+
+<!-- script  -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+crossorigin="anonymous"></script>
+<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+
+<script src="{%static 'js/script.js'%}"></script>
+</body>
+</html>

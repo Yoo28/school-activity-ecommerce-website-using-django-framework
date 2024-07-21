@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Order Confirmation</title>
+    <style>
+        /* Add your custom CSS styling here */
+    </style>
+</head>
+<body>
+    <h1>Order Confirmation</h1>
+    <p>Thank you for your order! Here are the details:</p>
+    
+    <h2>Order Items</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Size</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in order_items %}
+            <tr>
+                <td>{{ item.product.name }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.size }}</td>
+                <td> ₱ {{ item.subtotal }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <h2>Order Total</h2>
+    <p>Total Price: ₱ {{ total_price }}</p>
+    
+    <h2>Order Tracking</h2>
+    <p>Tracking Number: {{ tracking_number }}</p>
+    
+    <p>Thank you for shopping with us!</p>
+</body>
+</html>

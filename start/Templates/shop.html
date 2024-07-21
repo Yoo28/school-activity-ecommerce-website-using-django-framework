@@ -1,0 +1,212 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<section class="page-header">
+	<h2>ALL PRODUCTS</h2>
+</section>
+
+
+  
+<style>
+ .page-header {
+  text-align: center;
+}
+
+    body {
+    
+        margin: 0;
+        padding: 50px;
+    }
+
+    .product-card {
+        border: 1px solid #dddddd;
+        text-align: center;
+        margin: 10px;
+        border-radius: 10px;
+        background-color: #ffffff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: box-shadow 0.3s ease;
+        position: relative;
+        padding: 30px;
+    }
+
+    .product-card img {
+        width: 100%;
+        height: 200px; /* Set a fixed height for the images */
+        object-fit: cover; /* Ensure the image covers the specified height and width */
+        border-radius: 8px;
+        margin-bottom: 15px;
+    }
+
+    .product-card h2 {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .product-card p {
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+
+    .product-card .price {
+        font-size: 16px;
+        font-weight: bold;
+        color: #007bff;
+        margin-bottom: 10px;
+    }
+
+    .sizes {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+
+    .size-select {
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 8px;
+        cursor: pointer;
+        margin-right: 5px;
+    }
+
+    .quantity-btn {
+        font-size: 18px;
+        cursor: pointer;
+        margin: 20px;
+    }
+
+    .add-to-cart-btn {
+        background-color: #4caf50;
+        color: #fff;
+        padding: 10px;
+        text-decoration: none;
+        display: block;
+        border-radius: 5px;
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80%;
+        transition: background-color 0.3s ease;
+    }
+
+    .add-to-cart-btn:hover {
+        background-color: #45a049;
+    }
+
+    .product-card:hover {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+</style>
+
+<body>
+  
+
+<div class="container">
+  <div class="row">
+      {% for product in products %}
+      <div class="col-md-3">
+          <div class="product-card">
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="card-img rounded-0 img-fluid">
+              <h2>{{ product.name }}</h2>
+              <p>{{ product.description }}</p>
+              <p class="price">Price: ₱ {{ product.price }}</p>
+              <form method="POST" action="{% url 'add_to_cart' product.id %}">
+                  {% csrf_token %}
+                  <div class="sizes">
+                      <select name="size" class="size-select">
+                          <option value="S">S</option>
+                          <option value="M">M</option>
+                          <option value="L">L</option>
+                          <option value="XL">XL</option>
+                      </select>
+
+                  </div>
+                  
+                  <button type="submit" class="btn btn-primary add-to-cart" onclick="addToCart(this)">Add to Cart</button>
+              </form>
+          </div>
+      </div>
+      {% endfor %}
+  </div>
+
+</body>
+<!-- Add Fancybox library and initialize image gallery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+
+<!-- ... Your existing HTML ... -->
+<!-- ... Your existing HTML ... -->
+
+<script>
+  function addToCart(button) {
+    var productCard = button.closest('.product-card');
+    var productImage = productCard.querySelector('.card-img');
+    var cartIcon = document.querySelector('.fa-cart-arrow-down');
+    var cartPosition = cartIcon.getBoundingClientRect();
+    var productPosition = productImage.getBoundingClientRect();
+
+    var clonedProduct = productImage.cloneNode(true);
+    clonedProduct.style.position = 'fixed';
+    clonedProduct.style.width = '100px';
+    clonedProduct.style.zIndex = '9999';
+    clonedProduct.style.transition = 'all 1s ease-in-out';
+    clonedProduct.style.top = productPosition.top + 'px';
+    clonedProduct.style.left = productPosition.left + 'px';
+
+    document.body.appendChild(clonedProduct);
+
+    setTimeout(function() {
+      clonedProduct.style.top = cartPosition.top + 'px';
+      clonedProduct.style.left = cartPosition.left + 'px';
+      clonedProduct.style.width = '50px';
+    }, 100);
+
+    setTimeout(function() {
+      clonedProduct.remove();
+      location.reload(); // Reload the page to update the cart contents
+    }, 1000);
+  }
+
+  $(document).ready(function() {
+    $('form').on('submit', function(event) {
+      event.preventDefault();
+      var form = $(this);
+      $.ajax({
+        url: form.attr('action'),
+        type: form.attr('method'),
+        data: form.serialize(),
+        success: function(response) {
+          // Handle the response here
+          console.log(response.message);
+        },
+        error: function(xhr, errmsg, err) {
+          console.log(errmsg);
+        }
+      });
+    });
+  });
+</script>
+
+<!-- ... Your existing HTML ... -->
+
+
+<!-- ... Your existing HTML ... -->
+
+
+{% endblock %}

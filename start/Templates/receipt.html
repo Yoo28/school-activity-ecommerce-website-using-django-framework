@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Receipt</title>
+</head>
+<body>
+    <h2>Order Confirmation</h2>
+    
+    <p>Thank you, {{ customer_name }}, for your order!</p>
+    
+    <h3>Order Details:</h3>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Size</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in order_items %}
+            <tr>
+                <td>{{ item.product.name }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.size }}</td>
+                <td>₱ {{ item.subtotal }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <p>Total Price: ₱ {{ total_price }}</p>
+    
+    <h3>Contact Information:</h3>
+    
+    <p>Name: {{ customer_name }}</p>
+    <p>Email: {{ customer_email }}</p>
+    <p>Phone: {{ phone }}</p>
+    <p>Address: {{ address }}</p>
+    
+    {% if tracking_number %}
+    <h3>Order Tracking:</h3>
+    <p>Tracking Number: {{ tracking_number }}</p>
+    {% endif %}
+    
+    <p>Shop Email: clbapparelfits@gmail.com</p>
+    
+    <p>Thank you for shopping with us!</p>
+</body>
+</html>

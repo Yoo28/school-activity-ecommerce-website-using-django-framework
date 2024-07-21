@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      
+      <h2>Order Items</h2>
+      {% if order_items %}
+        <table class="table">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Image</th>
+              <th>Product</th>
+              <th>Quantity</th>
+              <th>Subtotal</th>
+              <th>Size</th>
+              
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in order_items %}
+              <tr>
+                <td>{{ forloop.counter }}</td>
+                <td><img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="img-fluid" style="max-width: 100px;"></td>
+                <td>{{ item.product.name }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.subtotal }}</td>
+                <td>{{ item.size }}</td>
+                
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% else %}
+        <p>No items in the order.</p>
+      {% endif %}
+      
+    </div>
+  </div>
+</div>
+
+{% endblock %}
